@@ -8,13 +8,12 @@ using MonoTouch.MessageUI;
 
 using Mono.Data.Sqlite;
 
-namespace ShareDatabaseiOS
+namespace ShareDatabase
 {
 	public partial class ShareDatabaseiOSViewController : UIViewController
 	{
-		public static readonly string DB_PATH = Path.Combine(System.Environment.GetFolderPath(System.Environment.SpecialFolder.Personal), "message.db");
-
-		public string Password {private get; set;}
+		private MessageDbFile _messageDb = new MessageDbFile(
+			Path.Combine(System.Environment.GetFolderPath(System.Environment.SpecialFolder.Personal), "message.db"));
 
 		static bool UserInterfaceIdiomIsPhone {
 			get { return UIDevice.CurrentDevice.UserInterfaceIdiom == UIUserInterfaceIdiom.Phone; }
@@ -38,76 +37,50 @@ namespace ShareDatabaseiOS
 		public override void ViewDidAppear (bool animated)
 		{
 			base.ViewDidAppear (animated);
-			LoadDatabase();
+			Load ()
 		}
-		
-		public override bool ShouldAutorotateToInterfaceOrientation (UIInterfaceOrientation toInterfaceOrientation)
+
+		public override UIInterfaceOrientationMask GetSupportedInterfaceOrientations ()
 		{
-			return false;
+			return UIInterfaceOrientationMask.Portrait;
+		}
+
+		private void Load() 
+		{
+			textViewMessage.Text = _messageDb.LoadMessage();
+			/*
+			var alert = new UIAlertView("Enter Password", "Password", null, "OK", null) {
+				AlertViewStyle = UIAlertViewStyle.SecureTextInput
+			};
+			alert.Clicked += (s, a) =>  {
+				_messageDb.Password = alert.GetTextField(0).Text;
+				textViewMessage.Text = _messageDb.LoadMessage();
+			};
+			alert.Show();
+			*/
+		}
+
+		private void Save() 
+		{
+			_messageDb.SaveMessage(textViewMessage.Text);
+			/*
+			var alert = new UIAlertView("Enter Password", "Password", null, "OK", null) {
+				AlertViewStyle = UIAlertViewStyle.SecureTextInput
+			};
+			alert.Clicked += (s, a) =>  {
+				_messageDb.Password = alert.GetTextField(0).Text;
+				_messageDb.SaveMessage(textViewMessage.Text);
+			};
+			alert.Show();
+			*/
 		}
 
 		partial void SendButtonClick(MonoTouch.Foundation.NSObject sender) 
 		{
-			//var alert = new UIAlertView("Test", "Test Message", new PasswordAlertDelegate(this), "OK", null);
-			//alert.AlertViewStyle = UIAlertViewStyle.SecureTextInput;
-			//alert.Show();
-			SaveDatabase();
+			Save ();
 		}
 
-		public void LoadDatabase()
-		{
-			if(File.Exists(DB_PATH)) 
-			{
-				using(var connection = new SqliteConnection(String.Format("Data Source={0}", DB_PATH)))
-				{
-					connection.Open();
-					
-					if(!string.IsNullOrEmpty(Password)) 
-					{
-						System.Console.WriteLine("Password: " + Password);
-					}
-					
-					using (var command = connection.CreateCommand())
-					{
-						command.CommandText = "SELECT content FROM message WHERE id = 0";
-						string message = (string) command.ExecuteScalar();
-
-						textViewMessage.Text = message;
-					}
-				}
-			}
-		}
-
-		public void SaveDatabase() 
-		{
-			using(var connection = new SqliteConnection(String.Format("Data Source={0}",DB_PATH)))
-			{
-				connection.Open();
-				
-				if(!string.IsNullOrEmpty(Password)) 
-				{
-					System.Console.WriteLine("Password: " + Password);
-				}
-				
-				using (var command = connection.CreateCommand())
-				{
-					command.CommandText = "CREATE TABLE IF NOT EXISTS message(id INTEGER PRIMARY KEY, content TEXT)";
-					command.ExecuteNonQuery();
-				}
-				
-				using (var command = connection.CreateCommand())
-				{
-					command.CommandText = "INSERT OR REPLACE INTO message (id, content) VALUES (0, @content)";
-					var p = command.CreateParameter();
-					p.ParameterName = "@content";
-					p.Value = textViewMessage.Text;
-					command.Parameters.Add(p);
-					command.ExecuteNonQuery();
-				}
-			}
-		}
-
-		public void SendDatabase() 
+		private void SendDatabase() 
 		{
 			if (MFMailComposeViewController.CanSendMail) 
 			{
@@ -115,9 +88,8 @@ namespace ShareDatabaseiOS
 				mail.SetSubject("Test Message");
 				mail.SetToRecipients(new string[]{textFieldEmail.Text});
 				mail.SetMessageBody (textViewMessage.Text, false);
-				mail.AddAttachmentData(NSData.FromFile(DB_PATH), "application/x-net-zetetic-dbfile", "message.db");
-				PresentViewController(mail, true, null);
-				
+				mail.AddAttachmentData(_messageDb.FilePath, MessageDbFile.MIME_TYPE, Path.GetFileName(_messageDb.FilePath));
+				PresentViewController(mail, true, null);				
 			} else {
 				Console.WriteLine("cant send mail");
 			}
@@ -125,24 +97,8 @@ namespace ShareDatabaseiOS
 
 		public void HandleOpenUrl(NSUrl url) 
 		{
-			File.Copy(url.Path, DB_PATH, true);
-			LoadDatabase();
-		}
-	}
-
-	public class PasswordAlertDelegate : UIAlertViewDelegate
-	{
-		private ShareDatabaseiOSViewController _controller;
-
-		public PasswordAlertDelegate(ShareDatabaseiOSViewController controller)
-		{
-			_controller = controller;
-		}
-
-		public override void Clicked (UIAlertView alertview, int buttonIndex)
-		{
-			Console.WriteLine("clicked password button" + alertview.GetTextField(0).Text);
-			_controller.Password = alertview.GetTextField(0).Text;
+			File.Copy(url.Path, _messageDb.FilePath, true);
+			Load ();
 		}
 	}
 }

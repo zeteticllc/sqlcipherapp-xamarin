@@ -5,7 +5,7 @@ using System.Linq;
 using MonoTouch.Foundation;
 using MonoTouch.UIKit;
 
-namespace ShareDatabaseiOS
+namespace ShareDatabase
 {
 	public class Application
 	{

@@ -13,10 +13,10 @@ using Android.Views;
 using Android.Widget;
 using Android.Net;
 
-namespace ShareDatabaseAndroid
+namespace ShareDatabase
 {
 	[ContentProvider (new[]{"net.zetetic.dbfile.Provider"}, Label="Zetetic DbFile Provider")]
-	class DbFileProvider : ContentProvider
+	class MessageDbFileProvider : ContentProvider
 	{
 		public static Android.Net.Uri CONTENT_URI =  Android.Net.Uri.Parse("content://net.zetetic.dbfile.Provider/");
 

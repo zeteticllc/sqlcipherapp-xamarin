@@ -6,7 +6,7 @@
 //
 using MonoTouch.Foundation;
 
-namespace ShareDatabaseiOS
+namespace ShareDatabase
 {
 	[Register ("ShareDatabaseiOSViewController")]
 	partial class ShareDatabaseiOSViewController
