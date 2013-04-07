@@ -1,0 +1,20 @@
+﻿<Properties>
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="SendDatabaseAndroid/MainActivity.cs">
+    <Files>
+      <File FileName="SendDatabaseAndroid/MainActivity.cs" Line="62" Column="8" />
+      <File FileName="SendDatabaseAndroid/Resources/values/Strings.xml" Line="6" Column="49" />
+      <File FileName="SendDatabaseAndroid/DbFileProvider.cs" Line="21" Column="63" />
+    </Files>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore>
+      <Breakpoint file="/Users/sjlombardo/SendDatabase/SendDatabaseAndroid/MainActivity.cs" line="116" column="1" />
+      <Breakpoint file="/Users/sjlombardo/SendDatabase/SendDatabaseAndroid/MainActivity.cs" line="93" column="1" />
+      <Breakpoint file="/Users/sjlombardo/SendDatabase/SendDatabaseAndroid/MainActivity.cs" line="52" column="1" />
+      <Breakpoint file="/Users/sjlombardo/SendDatabase/SendDatabaseAndroid/MainActivity.cs" line="66" column="1" />
+    </BreakpointStore>
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MonoDevelop.Ide.ItemProperties.SendDatabaseAndroid MonoForAntroid.PreferredDevice="3.7in WVGA (Nexus One)" AndroidDeviceId-Debug="015d18848c0c1809" />
+</Properties>

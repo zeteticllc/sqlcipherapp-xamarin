@@ -1,0 +1,2 @@
+SendDatabaseAndroid.Activity1;senddatabaseandroid.Activity1
+SendDatabaseAndroid.DbFileProvider;senddatabaseandroid.DbFileProvider
