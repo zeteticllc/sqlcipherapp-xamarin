@@ -1,0 +1,5 @@
+.DS_Store
+*.userprefs
+
+ShareDatabaseAndroid/obj/*
+ShareDatabaseAndroid/bin/*
