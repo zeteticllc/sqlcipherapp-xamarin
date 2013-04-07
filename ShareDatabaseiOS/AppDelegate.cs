@@ -17,7 +17,6 @@ namespace ShareDatabaseiOS
 		UIWindow window;
 		ShareDatabaseiOSViewController viewController;
 
-		//
 		// This method is invoked when the application has loaded and is ready to run. In this 
 		// method you should instantiate the window, load the UI into it and then make the window
 		// visible.
@@ -31,9 +30,30 @@ namespace ShareDatabaseiOS
 			viewController = new ShareDatabaseiOSViewController ();
 			window.RootViewController = viewController;
 			window.MakeKeyAndVisible ();
-			
+
+			if(options != null)
+			{
+				var url = (NSUrl) options["UIApplicationLaunchOptionsURL"];
+				if (url != null && url.IsFileUrl) 
+				{
+					viewController.HandleOpenUrl(url);
+					Console.WriteLine(url);
+				}
+			}
 			return true;
 		}
+
+		public override bool OpenUrl (UIApplication application, NSUrl url, string sourceApplication, NSObject annotation)
+		{
+			if(url.IsFileUrl) 
+			{
+				Console.WriteLine(url);
+				viewController.HandleOpenUrl(url);
+				return true;
+			}
+			return false;
+		}
+
 	}
 }
 
