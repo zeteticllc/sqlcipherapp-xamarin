@@ -10,7 +10,7 @@ using Android.OS;
 
 using Mono.Data.Sqlite;
 
-namespace SendDatabaseAndroid
+namespace ShareDatabaseAndroid
 {
 	[Activity (Label = "SendDatabaseAndroid", MainLauncher = true)]
 	[IntentFilter (new[]{Intent.ActionView},

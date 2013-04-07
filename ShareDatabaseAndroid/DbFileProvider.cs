@@ -13,7 +13,7 @@ using Android.Views;
 using Android.Widget;
 using Android.Net;
 
-namespace SendDatabaseAndroid
+namespace ShareDatabaseAndroid
 {
 	[ContentProvider (new[]{"net.zetetic.dbfile.Provider"}, Label="Zetetic DbFile Provider")]
 	class DbFileProvider : ContentProvider
