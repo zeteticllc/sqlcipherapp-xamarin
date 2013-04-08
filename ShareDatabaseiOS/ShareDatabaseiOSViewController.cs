@@ -10,6 +10,7 @@ namespace ShareDatabase
 {
 	public partial class ShareDatabaseiOSViewController : UIViewController
 	{
+
 		private MessageDb _messageDb = new MessageDb(
 			Path.Combine(System.Environment.GetFolderPath(System.Environment.SpecialFolder.Personal), "message.db"));
 
@@ -30,12 +31,12 @@ namespace ShareDatabase
 		public override void ViewDidLoad ()
 		{
 			base.ViewDidLoad ();
+			Load ();
 		}
 
 		public override void ViewDidAppear (bool animated)
 		{
 			base.ViewDidAppear (animated);
-			Load ();
 		}
 
 		public override UIInterfaceOrientationMask GetSupportedInterfaceOrientations ()
@@ -95,8 +96,11 @@ namespace ShareDatabase
 				mail.SetSubject( "Zetetic Message Database");
 				mail.SetToRecipients(new string[]{});
 				mail.SetMessageBody ("Please find a database attached", false);
-				mail.AddAttachmentData(_messageDb.FilePath, MessageDb.MIME_TYPE, Path.GetFileName(_messageDb.FilePath));
-				PresentViewController(mail, true, null);				
+				mail.AddAttachmentData(NSData.FromFile(_messageDb.FilePath), MessageDb.MIME_TYPE, Path.GetFileName(_messageDb.FilePath));
+				mail.Finished += (s, e) => {
+					mail.DismissViewController(true, null);
+				};
+				PresentViewController(mail, true, null);			
 			}
 		}
 

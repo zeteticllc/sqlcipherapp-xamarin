@@ -7,6 +7,7 @@ using Android.Runtime;
 using Android.Views;
 using Android.Widget;
 using Android.OS;
+using Android.Text;
 
 namespace ShareDatabase
 {
@@ -65,9 +66,8 @@ namespace ShareDatabase
 			/*
 			textViewMessage.Text = _messageDb.LoadMessage();
 			*/
-			var input = new EditText(this) {
-				InputType = Android.Text.InputTypes.TextVariationPassword
-			};
+			var input = new EditText(this);
+			input.InputType = (InputTypes.ClassText | InputTypes.TextVariationPassword);
 			var builder = new AlertDialog.Builder(this)
 				.SetTitle("Enter Password")
 					.SetMessage("Password")
@@ -94,9 +94,8 @@ namespace ShareDatabase
 			_messageDb.SaveMessage(textViewMessage.Text);
 			*/
 
-			var input = new EditText(this) {
-				InputType = Android.Text.InputTypes.TextVariationPassword
-			};
+			var input = new EditText(this);
+			input.InputType = (InputTypes.ClassText | InputTypes.TextVariationPassword);
 			var builder = new AlertDialog.Builder(this)
 				.SetTitle("Enter Password")
 					.SetMessage("Password")
