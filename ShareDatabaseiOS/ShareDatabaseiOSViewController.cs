@@ -6,8 +6,6 @@ using MonoTouch.Foundation;
 using MonoTouch.UIKit;
 using MonoTouch.MessageUI;
 
-using Mono.Data.Sqlite;
-
 namespace ShareDatabase
 {
 	public partial class ShareDatabaseiOSViewController : UIViewController
@@ -47,8 +45,9 @@ namespace ShareDatabase
 
 		private void Load() 
 		{
-			textViewMessage.Text = _messageDb.LoadMessage();
 			/*
+			textViewMessage.Text = _messageDb.LoadMessage();
+			*/
 			var alert = new UIAlertView("Enter Password", "Password", null, "OK", null) {
 				AlertViewStyle = UIAlertViewStyle.SecureTextInput
 			};
@@ -57,20 +56,21 @@ namespace ShareDatabase
 				try
 				{
 					textViewMessage.Text = _messageDb.LoadMessage();
-				} catch (SqliteException e) 
+				} catch (Exception e) 
 				{
 					textViewMessage.Text = e.Message;
 				}
 				
 			};
 			alert.Show();
-			*/
+
 		}
 
 		private void Save() 
 		{
-			_messageDb.SaveMessage(textViewMessage.Text);
 			/*
+			_messageDb.SaveMessage(textViewMessage.Text);
+			*/
 			var alert = new UIAlertView("Enter Password", "Password", null, "OK", null) {
 				AlertViewStyle = UIAlertViewStyle.SecureTextInput
 			};
@@ -79,7 +79,7 @@ namespace ShareDatabase
 				_messageDb.SaveMessage(textViewMessage.Text);
 			};
 			alert.Show();
-			*/
+
 		}
 
 		partial void SaveButtonClick(MonoTouch.Foundation.NSObject sender) 
@@ -89,12 +89,11 @@ namespace ShareDatabase
 
 		partial void SendButtonClick(MonoTouch.Foundation.NSObject sender) 
 		{
-			Save ();
 			if (MFMailComposeViewController.CanSendMail) 
 			{
 				var mail = new MFMailComposeViewController ();
 				mail.SetSubject( "Zetetic Message Database");
-				mail.SetToRecipients(new string[]{textFieldEmail.Text});
+				mail.SetToRecipients(new string[]{});
 				mail.SetMessageBody ("Please find a database attached", false);
 				mail.AddAttachmentData(_messageDb.FilePath, MessageDb.MIME_TYPE, Path.GetFileName(_messageDb.FilePath));
 				PresentViewController(mail, true, null);				

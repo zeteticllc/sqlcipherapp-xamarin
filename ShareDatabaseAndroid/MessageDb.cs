@@ -1,6 +1,6 @@
 using System;
 using System.IO;
-using Mono.Data.Sqlite;
+using Mono.Data.Sqlcipher;
 
 namespace ShareDatabase
 {
@@ -9,8 +9,9 @@ namespace ShareDatabase
 		public const string MIME_TYPE = "application/x-net-zetetic-messagedb";
 
 		public string FilePath {get; set;}
-		//public string Password {private get; set;}
 
+		public string Password {private get; set;}
+		
 		public MessageDb (string filePath)
 		{
 			FilePath = filePath;
@@ -19,6 +20,7 @@ namespace ShareDatabase
 		public SqliteConnection GetConnection() 
 		{
 			var connection = new SqliteConnection(String.Format("Data Source={0}", FilePath));
+			connection.SetPassword(Password);
 			connection.Open();
 			return connection;
 		}

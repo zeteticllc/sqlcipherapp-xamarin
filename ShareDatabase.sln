@@ -51,6 +51,6 @@ Global
 		{56817FD2-8D32-4689-849A-EFF56886BC1C}.Release|iPhoneSimulator.Build.0 = Release|iPhoneSimulator
 	EndGlobalSection
 	GlobalSection(MonoDevelopProperties) = preSolution
-		StartupItem = ShareDatabaseAndroid\ShareDatabaseAndroid.csproj
+		StartupItem = ShareDatabaseiOS\ShareDatabaseiOS.csproj
 	EndGlobalSection
 EndGlobal

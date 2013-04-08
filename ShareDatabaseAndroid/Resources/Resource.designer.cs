@@ -26,6 +26,7 @@ namespace ShareDatabase
 		
 		public static void UpdateIdValues()
 		{
+			Mono.Data.Sqlcipher.Resource.String.library_name = ShareDatabase.Resource.String.library_name;
 		}
 		
 		public partial class Attribute
@@ -78,23 +79,26 @@ namespace ShareDatabase
 		public partial class String
 		{
 			
-			// aapt resource value: 0x7f040000
-			public const int app_name = 2130968576;
-			
-			// aapt resource value: 0x7f040004
-			public const int buttonSave = 2130968580;
+			// aapt resource value: 0x7f040001
+			public const int app_name = 2130968577;
 			
 			// aapt resource value: 0x7f040005
-			public const int buttonSend = 2130968581;
+			public const int buttonSave = 2130968581;
 			
-			// aapt resource value: 0x7f040001
-			public const int hintEmail = 2130968577;
-			
-			// aapt resource value: 0x7f040003
-			public const int hintMessage = 2130968579;
+			// aapt resource value: 0x7f040006
+			public const int buttonSend = 2130968582;
 			
 			// aapt resource value: 0x7f040002
-			public const int hintPassword = 2130968578;
+			public const int hintEmail = 2130968578;
+			
+			// aapt resource value: 0x7f040004
+			public const int hintMessage = 2130968580;
+			
+			// aapt resource value: 0x7f040003
+			public const int hintPassword = 2130968579;
+			
+			// aapt resource value: 0x7f040000
+			public const int library_name = 2130968576;
 			
 			private String()
 			{

@@ -8,8 +8,6 @@ using Android.Views;
 using Android.Widget;
 using Android.OS;
 
-using Mono.Data.Sqlite;
-
 namespace ShareDatabase
 {
 	[Activity (Label = "ShareDatabase", MainLauncher = true)]
@@ -46,7 +44,6 @@ namespace ShareDatabase
 
 			button = FindViewById<Button> (Resource.Id.buttonSend);
 			button.Click += delegate {
-				Save ();
 				var intent = new Intent(Android.Content.Intent.ActionSend);
 				intent.SetType("text/plain");
 				intent.PutExtra(Intent.ExtraEmail, new String[] { });
@@ -64,8 +61,10 @@ namespace ShareDatabase
 		private void Load()
 		{
 			var textViewMessage = FindViewById<TextView> (Resource.Id.editTextMessage);
-			textViewMessage.Text = _messageDb.LoadMessage();
+
 			/*
+			textViewMessage.Text = _messageDb.LoadMessage();
+			*/
 			var input = new EditText(this) {
 				InputType = Android.Text.InputTypes.TextVariationPassword
 			};
@@ -73,24 +72,41 @@ namespace ShareDatabase
 				.SetTitle("Enter Password")
 					.SetMessage("Password")
 					.SetView(input)
+					.SetCancelable(false)
 					.SetPositiveButton("OK", (sender, args) => {
-						_messageDb = input.Text;
+						_messageDb.Password = input.Text;
 						try
 						{
-							messageTextView.Text = _messageDb.LoadMessage();
-						} catch (SqliteException e) 
+							textViewMessage.Text = _messageDb.LoadMessage();
+						} catch (Exception e) 
 						{
-							messageTextView.Text = e.Message;
+							textViewMessage.Text = e.Message;
 						}
 					});
 			builder.Create().Show();
-			*/
+
 		}
 
 		private void Save()
 		{
 			var textViewMessage = FindViewById<TextView> (Resource.Id.editTextMessage);
+			/*
 			_messageDb.SaveMessage(textViewMessage.Text);
+			*/
+
+			var input = new EditText(this) {
+				InputType = Android.Text.InputTypes.TextVariationPassword
+			};
+			var builder = new AlertDialog.Builder(this)
+				.SetTitle("Enter Password")
+					.SetMessage("Password")
+					.SetView(input)
+					.SetCancelable(false)
+					.SetPositiveButton("OK", (sender, args) => {
+						_messageDb.Password = input.Text;
+						_messageDb.SaveMessage(textViewMessage.Text);
+					});
+			builder.Create().Show();
 		}
 
 		private void CopyStream(Stream istream, Stream ostream) {
