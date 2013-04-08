@@ -15,29 +15,19 @@ namespace ShareDatabase
 	[IntentFilter (
 		new[]{Intent.ActionView},
 		Categories=new[]{"android.intent.category.DEFAULT"},
-		DataMimeType=MessageDb.MIME_TYPE)]
+		DataMimeType="*/*")]
 	public class MainActivity : Activity
 	{
-		private MessageDb _messageDb = new MessageDb(
-			Path.Combine(System.Environment.GetFolderPath(System.Environment.SpecialFolder.Personal), "message.db")
-			);
+		private String databasePath = Path.Combine(System.Environment.GetFolderPath(System.Environment.SpecialFolder.Personal), "message.db");
+		private MessageDb _messageDb;
+		private TextView textViewMessage;
 
 		protected override void OnCreate (Bundle bundle)
 		{
 			base.OnCreate (bundle);
-
 			SetContentView (Resource.Layout.Main);
-
-			Android.Net.Uri uri = this.Intent != null ? this.Intent.Data : null;
-			if(uri != null) 
-			{
-				using(var istream = ContentResolver.OpenInputStream(uri)) {
-					using(var ostream = new FileStream(_messageDb.FilePath, FileMode.OpenOrCreate)) {
-						CopyStream(istream, ostream);
-					}
-				}
-			}
-
+			_messageDb = new MessageDb(databasePath);
+			textViewMessage = FindViewById<TextView> (Resource.Id.editTextMessage);
 			var button = FindViewById<Button> (Resource.Id.buttonSave);
 			button.Click += delegate {
 				Save ();
@@ -56,12 +46,30 @@ namespace ShareDatabase
 				StartActivity(intent);
 			};
 
-			Load ();
+		}
+
+		protected override void OnStart ()
+		{
+			base.OnStart();
+			textViewMessage.Text = "";
+			Android.Net.Uri uri = this.Intent != null ? this.Intent.Data : null;
+			if(uri != null) 
+			{
+				using(var istream = ContentResolver.OpenInputStream(uri)) {
+					using(var ostream = new FileStream(_messageDb.FilePath, FileMode.OpenOrCreate)) {
+						istream.CopyTo(ostream);
+						//CopyStream(istream, ostream);
+					}
+				}
+			}
+
+			if(File.Exists(databasePath)){
+				Load ();
+			}
 		}
 
 		private void Load()
 		{
-			var textViewMessage = FindViewById<TextView> (Resource.Id.editTextMessage);
 
 			/*
 			textViewMessage.Text = _messageDb.LoadMessage();
@@ -111,8 +119,10 @@ namespace ShareDatabase
 		private void CopyStream(Stream istream, Stream ostream) {
 			byte[] buffer = new byte[1024];
 			int read;
+			Console.WriteLine("Copying stream");
 			while ((read = istream.Read(buffer, 0, buffer.Length)) > 0)
 			{
+				Console.WriteLine("Bytes read:{0} to write", read);
 				ostream.Write (buffer, 0, read);
 			}
 		}
