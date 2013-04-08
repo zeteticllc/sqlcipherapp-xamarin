@@ -96,8 +96,8 @@
     <Compile Include="ShareDatabaseiOSViewController.designer.cs">
       <DependentUpon>ShareDatabaseiOSViewController.cs</DependentUpon>
     </Compile>
-    <Compile Include="..\ShareDatabaseAndroid\MessageDbFile.cs">
-      <Link>MessageDbFile.cs</Link>
+    <Compile Include="..\ShareDatabaseAndroid\MessageDb.cs">
+      <Link>MessageDb.cs</Link>
     </Compile>
   </ItemGroup>
   <ItemGroup>

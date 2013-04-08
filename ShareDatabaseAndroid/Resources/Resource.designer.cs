@@ -50,11 +50,11 @@ namespace ShareDatabase
 		public partial class Id
 		{
 			
+			// aapt resource value: 0x7f050001
+			public const int buttonSave = 2131034113;
+			
 			// aapt resource value: 0x7f050002
 			public const int buttonSend = 2131034114;
-			
-			// aapt resource value: 0x7f050001
-			public const int editTextEmail = 2131034113;
 			
 			// aapt resource value: 0x7f050000
 			public const int editTextMessage = 2131034112;
@@ -78,23 +78,23 @@ namespace ShareDatabase
 		public partial class String
 		{
 			
-			// aapt resource value: 0x7f040001
-			public const int app_name = 2130968577;
+			// aapt resource value: 0x7f040000
+			public const int app_name = 2130968576;
+			
+			// aapt resource value: 0x7f040004
+			public const int buttonSave = 2130968580;
 			
 			// aapt resource value: 0x7f040005
 			public const int buttonSend = 2130968581;
 			
-			// aapt resource value: 0x7f040000
-			public const int hello = 2130968576;
-			
-			// aapt resource value: 0x7f040002
-			public const int hintEmail = 2130968578;
-			
-			// aapt resource value: 0x7f040004
-			public const int hintMessage = 2130968580;
+			// aapt resource value: 0x7f040001
+			public const int hintEmail = 2130968577;
 			
 			// aapt resource value: 0x7f040003
-			public const int hintPassword = 2130968579;
+			public const int hintMessage = 2130968579;
+			
+			// aapt resource value: 0x7f040002
+			public const int hintPassword = 2130968578;
 			
 			private String()
 			{

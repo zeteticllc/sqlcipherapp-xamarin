@@ -6,18 +6,26 @@
     <EditText
         android:inputType="textMultiLine"
         android:layout_width="fill_parent"
-        android:layout_height="269.3dp"
+        android:layout_height="120dp"
         android:id="@+id/editTextMessage"
-        android:hint="@string/hintMessage" />
-    <EditText
-        android:inputType="textEmailAddress"
+        android:hint="@string/hintMessage"
+        android:layout_marginBottom="10dp"
+        android:layout_gravity="top" />
+    <LinearLayout
+        android:orientation="horizontal"
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/editTextEmail"
-        android:hint="@string/hintEmail" />
-    <Button
-        android:id="@+id/buttonSend"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/buttonSend" />
+        android:layout_height="fill_parent">
+        <Button
+            android:id="@+id/buttonSave"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/buttonSave"
+            android:layout_weight=".40" />
+        <Button
+            android:id="@+id/buttonSend"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/buttonSend"
+            android:layout_weight=".4" />
+    </LinearLayout>
 </LinearLayout>

@@ -4,29 +4,31 @@ using Mono.Data.Sqlite;
 
 namespace ShareDatabase
 {
-	public class MessageDbFile
+	public class MessageDb
 	{
-		public static readonly string MIME_TYPE = "application/x-net-zetetic-dbfile";
+		public const string MIME_TYPE = "application/x-net-zetetic-messagedb";
 
 		public string FilePath {get; set;}
 		//public string Password {private get; set;}
 
-		public MessageDbFile (string filePath)
+		public MessageDb (string filePath)
 		{
 			FilePath = filePath;
+		}
+
+		public SqliteConnection GetConnection() 
+		{
+			var connection = new SqliteConnection(String.Format("Data Source={0}", FilePath));
+			connection.Open();
+			return connection;
 		}
 
 		public string LoadMessage() 
 		{
 			if(File.Exists(FilePath)) 
 			{
-				using(var connection = new SqliteConnection(String.Format("Data Source={0}", FilePath)))
+				using(var connection = GetConnection())
 				{
-					/*if(!string.IsNullOrEmpty(Password)) 
-					{
-						System.Console.WriteLine("Password: " + Password);
-					}*/
-					connection.Open();
 					using (var command = connection.CreateCommand())
 					{
 						command.CommandText = "SELECT content FROM message WHERE id = 0";
@@ -40,15 +42,8 @@ namespace ShareDatabase
 		public void SaveMessage(string message) 
 		{
 			File.Delete(FilePath);
-
-			using(var connection = new SqliteConnection(String.Format("Data Source={0}",FilePath)))
-			{
-				connection.Open();
-				/*if(!string.IsNullOrEmpty(Password)) 
-					{
-						System.Console.WriteLine("Password: " + Password);
-					}*/
-				
+			using(var connection = GetConnection())
+			{	
 				using (var command = connection.CreateCommand())
 				{
 					command.CommandText = "CREATE TABLE message(id INTEGER PRIMARY KEY, content TEXT)";

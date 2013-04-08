@@ -12,13 +12,14 @@ using Mono.Data.Sqlite;
 
 namespace ShareDatabase
 {
-	[Activity (Label = "SendDatabaseAndroid", MainLauncher = true)]
-	[IntentFilter (new[]{Intent.ActionView},
-	Categories=new[]{"android.intent.category.DEFAULT"},
-	DataMimeType="application/x-net-zetetic-dbfile")]
-	public class Activity1 : Activity
+	[Activity (Label = "ShareDatabase", MainLauncher = true)]
+	[IntentFilter (
+		new[]{Intent.ActionView},
+		Categories=new[]{"android.intent.category.DEFAULT"},
+		DataMimeType=MessageDb.MIME_TYPE)]
+	public class MainActivity : Activity
 	{
-		private MessageDbFile _messageDb = new MessageDbFile(
+		private MessageDb _messageDb = new MessageDb(
 			Path.Combine(System.Environment.GetFolderPath(System.Environment.SpecialFolder.Personal), "message.db")
 			);
 
@@ -26,7 +27,6 @@ namespace ShareDatabase
 		{
 			base.OnCreate (bundle);
 
-			// Set our view from the "main" layout resource
 			SetContentView (Resource.Layout.Main);
 
 			Android.Net.Uri uri = this.Intent != null ? this.Intent.Data : null;
@@ -39,40 +39,49 @@ namespace ShareDatabase
 				}
 			}
 
-			Load ();
-			
-			var button = FindViewById<Button> (Resource.Id.buttonSend);
+			var button = FindViewById<Button> (Resource.Id.buttonSave);
 			button.Click += delegate {
 				Save ();
-				/*
-				var emailTextView = FindViewById<TextView> (Resource.Id.editTextEmail);
+			};
+
+			button = FindViewById<Button> (Resource.Id.buttonSend);
+			button.Click += delegate {
+				Save ();
 				var intent = new Intent(Android.Content.Intent.ActionSend);
 				intent.SetType("text/plain");
-				intent.PutExtra(Intent.ExtraEmail, new String[] { emailTextView.Text });
-				intent.PutExtra(Intent.ExtraSubject, "database file");
-				intent.PutExtra(Intent.ExtraText, "please find a database attached");
+				intent.PutExtra(Intent.ExtraEmail, new String[] { });
+				intent.PutExtra(Intent.ExtraSubject, "Zetetic Message Database");
+				intent.PutExtra(Intent.ExtraText, "Please find a database attached");
 
-				string url = DbFileProvider.CONTENT_URI.ToString() + "message.db";
+				string url = MessageDbProvider.CONTENT_URI.ToString() + "message.db";
 				intent.PutExtra(Intent.ExtraStream, Android.Net.Uri.Parse(url));
 				StartActivity(intent);
-				*/
 			};
+
+			Load ();
 		}
 
 		private void Load()
 		{
-			var messageTextView = FindViewById<TextView> (Resource.Id.editTextMessage);
-			messageTextView.Text = _messageDb.LoadMessage();
+			var textViewMessage = FindViewById<TextView> (Resource.Id.editTextMessage);
+			textViewMessage.Text = _messageDb.LoadMessage();
 			/*
 			var input = new EditText(this) {
 				InputType = Android.Text.InputTypes.TextVariationPassword
 			};
 			var builder = new AlertDialog.Builder(this)
 				.SetTitle("Enter Password")
-					.SetMessage("Enter An Encryption Password")
+					.SetMessage("Password")
 					.SetView(input)
 					.SetPositiveButton("OK", (sender, args) => {
-						Password = input.Text;
+						_messageDb = input.Text;
+						try
+						{
+							messageTextView.Text = _messageDb.LoadMessage();
+						} catch (SqliteException e) 
+						{
+							messageTextView.Text = e.Message;
+						}
 					});
 			builder.Create().Show();
 			*/
@@ -80,8 +89,8 @@ namespace ShareDatabase
 
 		private void Save()
 		{
-			var messageTextView = FindViewById<TextView> (Resource.Id.editTextMessage);
-			_messageDb.SaveMessage(messageTextView.Text);
+			var textViewMessage = FindViewById<TextView> (Resource.Id.editTextMessage);
+			_messageDb.SaveMessage(textViewMessage.Text);
 		}
 
 		private void CopyStream(Stream istream, Stream ostream) {

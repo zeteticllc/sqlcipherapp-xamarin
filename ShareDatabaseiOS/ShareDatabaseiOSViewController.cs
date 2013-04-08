@@ -12,7 +12,7 @@ namespace ShareDatabase
 {
 	public partial class ShareDatabaseiOSViewController : UIViewController
 	{
-		private MessageDbFile _messageDb = new MessageDbFile(
+		private MessageDb _messageDb = new MessageDb(
 			Path.Combine(System.Environment.GetFolderPath(System.Environment.SpecialFolder.Personal), "message.db"));
 
 		static bool UserInterfaceIdiomIsPhone {
@@ -37,7 +37,7 @@ namespace ShareDatabase
 		public override void ViewDidAppear (bool animated)
 		{
 			base.ViewDidAppear (animated);
-			Load ()
+			Load ();
 		}
 
 		public override UIInterfaceOrientationMask GetSupportedInterfaceOrientations ()
@@ -54,7 +54,14 @@ namespace ShareDatabase
 			};
 			alert.Clicked += (s, a) =>  {
 				_messageDb.Password = alert.GetTextField(0).Text;
-				textViewMessage.Text = _messageDb.LoadMessage();
+				try
+				{
+					textViewMessage.Text = _messageDb.LoadMessage();
+				} catch (SqliteException e) 
+				{
+					textViewMessage.Text = e.Message;
+				}
+				
 			};
 			alert.Show();
 			*/
@@ -75,23 +82,22 @@ namespace ShareDatabase
 			*/
 		}
 
-		partial void SendButtonClick(MonoTouch.Foundation.NSObject sender) 
+		partial void SaveButtonClick(MonoTouch.Foundation.NSObject sender) 
 		{
 			Save ();
 		}
 
-		private void SendDatabase() 
+		partial void SendButtonClick(MonoTouch.Foundation.NSObject sender) 
 		{
+			Save ();
 			if (MFMailComposeViewController.CanSendMail) 
 			{
 				var mail = new MFMailComposeViewController ();
-				mail.SetSubject("Test Message");
+				mail.SetSubject( "Zetetic Message Database");
 				mail.SetToRecipients(new string[]{textFieldEmail.Text});
-				mail.SetMessageBody (textViewMessage.Text, false);
-				mail.AddAttachmentData(_messageDb.FilePath, MessageDbFile.MIME_TYPE, Path.GetFileName(_messageDb.FilePath));
+				mail.SetMessageBody ("Please find a database attached", false);
+				mail.AddAttachmentData(_messageDb.FilePath, MessageDb.MIME_TYPE, Path.GetFileName(_messageDb.FilePath));
 				PresentViewController(mail, true, null);				
-			} else {
-				Console.WriteLine("cant send mail");
 			}
 		}
 

@@ -26,14 +26,14 @@
 	<array>
 		<dict>
 			<key>CFBundleTypeName</key>
-			<string>Zetetic DbFile</string>
-      <key>CFBundleTypeRole</key>
-      <string>Editor</string>
-      <key>LSHandlerRank</key>
-      <string>Owner</string>
+			<string>Zetetic Message Database</string>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>LSHandlerRank</key>
+			<string>Owner</string>
 			<key>LSItemContentTypes</key>
 			<array>
-				<string>net.zetetic.dbfile</string>
+				<string>net.zetetic.messagedb</string>
 			</array>
 		</dict>
 	</array>
@@ -47,7 +47,7 @@
 				<string>public.data</string>
 			</array>
 			<key>UTTypeIdentifier</key>
-			<string>net.zetetic.dbfile</string>
+			<string>net.zetetic.messagedb</string>
 			<key>UTTypeTagSpecification</key>
 			<dict>
 				<key>public.mime-type</key>

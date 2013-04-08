@@ -49,8 +49,8 @@
     <Compile Include="MainActivity.cs" />
     <Compile Include="Resources\Resource.designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="MessageDbFile.cs" />
-    <Compile Include="MessageDbFileProvider.cs" />
+    <Compile Include="MessageDbProvider.cs" />
+    <Compile Include="MessageDb.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\AboutResources.txt" />

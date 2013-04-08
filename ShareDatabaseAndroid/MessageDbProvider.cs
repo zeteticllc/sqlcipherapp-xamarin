@@ -15,14 +15,14 @@ using Android.Net;
 
 namespace ShareDatabase
 {
-	[ContentProvider (new[]{"net.zetetic.dbfile.Provider"}, Label="Zetetic DbFile Provider")]
-	class MessageDbFileProvider : ContentProvider
+	[ContentProvider (new[]{"net.zetetic.messagedb.Provider"}, Label="Zetetic Message Database Provider")]
+	class MessageDbProvider : ContentProvider
 	{
-		public static Android.Net.Uri CONTENT_URI =  Android.Net.Uri.Parse("content://net.zetetic.dbfile.Provider/");
+		public static Android.Net.Uri CONTENT_URI =  Android.Net.Uri.Parse("content://net.zetetic.messagedb.Provider/");
 
 		public override string GetType (Android.Net.Uri uri)
 		{
-			return "application/x-net-zetetic-dbfile";
+			return MessageDb.MIME_TYPE;
 		}
 
 		public override bool OnCreate ()

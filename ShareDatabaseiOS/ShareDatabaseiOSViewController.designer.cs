@@ -15,10 +15,16 @@ namespace ShareDatabase
 		MonoTouch.UIKit.UIButton buttonSend { get; set; }
 
 		[Outlet]
+		MonoTouch.UIKit.UIButton buttonSave { get; set; }
+
+		[Outlet]
 		MonoTouch.UIKit.UITextField textFieldEmail { get; set; }
 
 		[Outlet]
 		MonoTouch.UIKit.UITextView textViewMessage { get; set; }
+
+		[Action ("SaveButtonClick:")]
+		partial void SaveButtonClick (MonoTouch.Foundation.NSObject sender);
 
 		[Action ("SendButtonClick:")]
 		partial void SendButtonClick (MonoTouch.Foundation.NSObject sender);
@@ -28,6 +34,11 @@ namespace ShareDatabase
 			if (buttonSend != null) {
 				buttonSend.Dispose ();
 				buttonSend = null;
+			}
+
+			if (buttonSave != null) {
+				buttonSave.Dispose ();
+				buttonSave = null;
 			}
 
 			if (textFieldEmail != null) {
