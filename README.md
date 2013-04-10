@@ -18,7 +18,7 @@ To complete the challenge you must make a few  changes to convert the applicatio
 
 **Step 1.** Download the SQLCipher-enhanced sqlite-net source code from the following URL
 
-[https://raw.github.com/sqlcipher/sqlite-net/master/src/SQLite.cs](https://raw.github.com/sqlcipher/sqlite-net/master/src/SQLite.cs)
+[https://raw.github.com/zeteticllc/sqlite-net/master/src/SQLite.cs](https://raw.github.com/sqlcipher/sqlite-net/master/src/SQLite.cs)
 
 Copy the new SQLite.cs file into the ShareDatabaseAndroid folder, replace the standard SQLite.c file already there. This file is shared across the Android and iOS projects, so it only needs to be modified once.
 
