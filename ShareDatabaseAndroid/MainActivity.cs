@@ -58,7 +58,6 @@ namespace ShareDatabase
 				using(var istream = ContentResolver.OpenInputStream(uri)) {
 					using(var ostream = new FileStream(_messageDb.FilePath, FileMode.OpenOrCreate)) {
 						istream.CopyTo(ostream);
-						//CopyStream(istream, ostream);
 					}
 				}
 			}
@@ -114,17 +113,6 @@ namespace ShareDatabase
 						_messageDb.SaveMessage(textViewMessage.Text);
 					});
 			builder.Create().Show();
-		}
-
-		private void CopyStream(Stream istream, Stream ostream) {
-			byte[] buffer = new byte[1024];
-			int read;
-			Console.WriteLine("Copying stream");
-			while ((read = istream.Read(buffer, 0, buffer.Length)) > 0)
-			{
-				Console.WriteLine("Bytes read:{0} to write", read);
-				ostream.Write (buffer, 0, read);
-			}
 		}
 	}
 }
