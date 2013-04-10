@@ -31,10 +31,12 @@ namespace ShareDatabase
 		public override void ViewDidAppear (bool animated)
 		{
 			base.ViewDidAppear (animated);
+			textViewMessage.Text = "";
 			if(File.Exists(_databasePath))
 			{
 				Load ();
 			}
+			textViewMessage.BecomeFirstResponder();
 		}
 
 		public override UIInterfaceOrientationMask GetSupportedInterfaceOrientations ()
