@@ -39,7 +39,7 @@
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
     <OutputPath>bin\iPhone\Debug</OutputPath>
-    <DefineConstants>DEBUG;</DefineConstants>
+    <DefineConstants>DEBUG;USE_SQLITE_NET</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <ConsolePause>false</ConsolePause>
@@ -59,6 +59,7 @@
     <ConsolePause>false</ConsolePause>
     <CodesignKey>iPhone Developer</CodesignKey>
     <AssemblyName>SQLCipherAppiOS</AssemblyName>
+    <DefineConstants>USE_SQLITE_NET</DefineConstants>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Ad-Hoc|iPhone' ">
     <DebugType>none</DebugType>
@@ -71,6 +72,7 @@
     <CodesignProvision>Automatic:AdHoc</CodesignProvision>
     <CodesignKey>iPhone Distribution</CodesignKey>
     <AssemblyName>SQLCipherAppiOS</AssemblyName>
+    <DefineConstants>USE_SQLITE_NET</DefineConstants>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'AppStore|iPhone' ">
     <DebugType>none</DebugType>
@@ -82,6 +84,7 @@
     <CodesignKey>iPhone Distribution</CodesignKey>
     <CodesignProvision>Automatic:AppStore</CodesignProvision>
     <AssemblyName>SQLCipherAppiOS</AssemblyName>
+    <DefineConstants>USE_SQLITE_NET</DefineConstants>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -106,12 +109,12 @@
     <Compile Include="..\SQLCipherAppAndroid\MessageDbSqlite.cs">
       <Link>MessageDbSqlite.cs</Link>
     </Compile>
-    <Compile Include="..\SQLCipherAppAndroid\SQLite.cs">
-      <Link>SQLite.cs</Link>
-    </Compile>
     <Compile Include="MainViewController.cs" />
     <Compile Include="MainViewController.designer.cs">
       <DependentUpon>MainViewController.cs</DependentUpon>
+    </Compile>
+    <Compile Include="..\SQLCipherAppAndroid\SQLite.cs">
+      <Link>SQLite.cs</Link>
     </Compile>
   </ItemGroup>
   <ItemGroup>

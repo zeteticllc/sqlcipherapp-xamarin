@@ -16,18 +16,9 @@ To complete the challenge you must make a few  changes to convert the applicatio
 
 ### Walkthrough 1 - Using sqlite-net
 
-**Step 1.** Download the SQLCipher-enhanced sqlite-net source code from the following URL
+**Step 1.** Delete the SQLite.cs file from the SQLCipherAppiOS and SQLCipherAppAndroid projects, as sqlite-net will now be included automatically as part of the SQLCipher component. 
 
-[https://raw.github.com/zeteticllc/sqlite-net/master/src/SQLite.cs](https://raw.github.com/sqlcipher/sqlite-net/master/src/SQLite.cs)
-
-Copy the new SQLite.cs file into the SQLCipherAppAndroid folder, replace the standard SQLite.c file already there. This file is shared across the Android and iOS projects, so it only needs to be modified once.
-
-**Step 2.** For both projects, open Project Options, navigate to the Compiler settings and append USE\_SQLITE\_NET to the _Define Symbols_ so it reads:
-```
-DEBUG;USE_SQLITE_NET
-```
-
-**Step 3.** Open the MessageDbSqlite.cs class and change the GetConnection() method to call the SQLiteConnection constructor that includes the SQLCipher password, i.e. from:
+**Step 2.** Open the MessageDbSqlite.cs class and change the GetConnection() method to call the SQLiteConnection constructor that includes the SQLCipher password, i.e. from:
 ```
 public SQLiteConnection GetConnection() 
 {
@@ -45,9 +36,14 @@ public SQLiteConnection GetConnection()
 
 ### Walkthrough 2 - Using ADO.NET with Mono.Data.Sqlite
 
-**Step 1.** Open MessageDbAdo.cs 
+**Step 1.** For both projects, open Project Options, navigate to the Compiler settings and remove USE\_SQLITE\_NET from the _Define Symbols_ so it reads:
+```
+DEBUG;
+```
 
-**Step 2.** Change Mono.Data.Sqlite to Mono.Data.Sqlcipher, i.e.:
+**Step 2.** Open MessageDbAdo.cs 
+
+**Step 3.** Change Mono.Data.Sqlite to Mono.Data.Sqlcipher, i.e.:
 ```
 using Mono.Data.Sqlite;
 ```
@@ -56,7 +52,7 @@ to
 using Mono.Data.Sqlcipher
 ```
 
-**Step 3.** Change the GetConnection method to call SetPassword() on the SqliteConnection before Open(). i.e.  from:
+**Step 4.** Change the GetConnection method to call SetPassword() on the SqliteConnection before Open(). i.e.  from:
 ```
 public SqliteConnection GetConnection() 
 {
