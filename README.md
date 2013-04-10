@@ -22,9 +22,9 @@ To complete the challenge you must make a few  changes to convert the applicatio
 
 Copy the new SQLite.cs file into the SQLCipherAppAndroid folder, replace the standard SQLite.c file already there. This file is shared across the Android and iOS projects, so it only needs to be modified once.
 
-**Step 2.** For both projects, open Project Options, navigate to the Compiler settings and append USE\_SQLCIPHER\_SQLITE to the _Define Symbols_ so it reads:
+**Step 2.** For both projects, open Project Options, navigate to the Compiler settings and append USE\_SQLITE\_NET to the _Define Symbols_ so it reads:
 ```
-DEBUG;USE_SQLCIPHER_SQLITE
+DEBUG;USE_SQLITE_NET
 ```
 
 **Step 3.** Open the MessageDbSqlite.cs class and change the GetConnection() method to call the SQLiteConnection constructor that includes the SQLCipher password, i.e. from:

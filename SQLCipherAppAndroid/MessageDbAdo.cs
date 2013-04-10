@@ -1,4 +1,4 @@
-#if !USE_SQLCIPHER_SQLITE
+#if !USE_SQLITE_NET
 using System;
 using System.IO;
 using Mono.Data.Sqlite;
