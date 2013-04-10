@@ -3,7 +3,7 @@ using System;
 using System.IO;
 using Mono.Data.Sqlite;
 
-namespace ShareDatabase
+namespace SQLCipherApp
 {
 	public class MessageDb
 	{

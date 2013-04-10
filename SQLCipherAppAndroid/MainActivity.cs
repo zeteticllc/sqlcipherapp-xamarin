@@ -9,9 +9,9 @@ using Android.Widget;
 using Android.OS;
 using Android.Text;
 
-namespace ShareDatabase
+namespace SQLCipherApp
 {
-	[Activity (Label = "ShareDatabase", MainLauncher = true)]
+	[Activity (Label = "SQLCipher", MainLauncher = true)]
 	[IntentFilter (
 		new[]{Intent.ActionView},
 		Categories=new[]{"android.intent.category.DEFAULT"},

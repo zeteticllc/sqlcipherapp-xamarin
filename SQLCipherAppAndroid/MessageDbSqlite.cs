@@ -3,7 +3,7 @@ using System;
 using System.IO;
 using SQLite;
 
-namespace ShareDatabase
+namespace SQLCipherApp
 {
 	public class Message
 	{

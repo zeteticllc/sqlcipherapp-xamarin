@@ -13,7 +13,7 @@ using Android.Views;
 using Android.Widget;
 using Android.Net;
 
-namespace ShareDatabase
+namespace SQLCipherApp
 {
 	[ContentProvider (new[]{"net.zetetic.messagedb.Provider"}, Label="Zetetic Message Database Provider")]
 	class MessageDbProvider : ContentProvider

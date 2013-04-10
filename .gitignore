@@ -1,9 +1,9 @@
 .DS_Store
 *.userprefs
 
-ShareDatabaseAndroid/obj/*
-ShareDatabaseAndroid/bin/*
+SQLCipherAppAndroid/obj/*
+SQLCipherAppAndroid/bin/*
 
-ShareDatabaseiOS/obj/*
-ShareDatabaseiOS/bin/*
+SQLCipherAppiOS/obj/*
+SQLCipherAppiOS/bin/*
 

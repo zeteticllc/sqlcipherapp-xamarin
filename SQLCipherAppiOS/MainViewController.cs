@@ -6,9 +6,9 @@ using MonoTouch.Foundation;
 using MonoTouch.UIKit;
 using MonoTouch.MessageUI;
 
-namespace ShareDatabase
+namespace SQLCipherApp
 {
-	public partial class ShareDatabaseiOSViewController : UIViewController
+	public partial class MainViewController : UIViewController
 	{
 		private string _databasePath = Path.Combine(System.Environment.GetFolderPath(System.Environment.SpecialFolder.Personal), "message.db");
 		private MessageDb _messageDb;
@@ -17,8 +17,8 @@ namespace ShareDatabase
 			get { return UIDevice.CurrentDevice.UserInterfaceIdiom == UIUserInterfaceIdiom.Phone; }
 		}
 
-		public ShareDatabaseiOSViewController ()
-			: base (UserInterfaceIdiomIsPhone ? "ShareDatabaseiOSViewController_iPhone" : "ShareDatabaseiOSViewController_iPad", null)
+		public MainViewController ()
+			: base (UserInterfaceIdiomIsPhone ? "MainViewController_iPhone" : "MainViewController_iPad", null)
 		{
 		}
 

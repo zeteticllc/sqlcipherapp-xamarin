@@ -1,9 +1,9 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ShareDatabaseAndroid", "ShareDatabaseAndroid\ShareDatabaseAndroid.csproj", "{1F68DC5E-9923-43EE-8969-C4C8D202F3D2}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SQLCipherAppAndroid", "SQLCipherAppAndroid\SQLCipherAppAndroid.csproj", "{1F68DC5E-9923-43EE-8969-C4C8D202F3D2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ShareDatabaseiOS", "ShareDatabaseiOS\ShareDatabaseiOS.csproj", "{56817FD2-8D32-4689-849A-EFF56886BC1C}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SQLCipherAppiOS", "SQLCipherAppiOS\SQLCipherAppiOS.csproj", "{56817FD2-8D32-4689-849A-EFF56886BC1C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -51,6 +51,6 @@ Global
 		{56817FD2-8D32-4689-849A-EFF56886BC1C}.Release|iPhoneSimulator.Build.0 = Release|iPhoneSimulator
 	EndGlobalSection
 	GlobalSection(MonoDevelopProperties) = preSolution
-		StartupItem = ShareDatabaseiOS\ShareDatabaseiOS.csproj
+		StartupItem = SQLCipherAppiOS\SQLCipherAppiOS.csproj
 	EndGlobalSection
 EndGlobal

@@ -6,10 +6,10 @@
 //
 using MonoTouch.Foundation;
 
-namespace ShareDatabase
+namespace SQLCipherApp
 {
 	[Register ("ShareDatabaseiOSViewController")]
-	partial class ShareDatabaseiOSViewController
+	partial class MainViewController
 	{
 		[Outlet]
 		MonoTouch.UIKit.UIButton buttonSend { get; set; }
