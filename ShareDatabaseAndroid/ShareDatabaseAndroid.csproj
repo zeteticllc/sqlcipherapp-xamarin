@@ -22,7 +22,7 @@
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
     <OutputPath>bin\Debug</OutputPath>
-    <DefineConstants>DEBUG;USE_SQLCIPHER_SQLITE</DefineConstants>
+    <DefineConstants>DEBUG;</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <ConsolePause>false</ConsolePause>
@@ -44,9 +44,7 @@
     <Reference Include="System.Core" />
     <Reference Include="Mono.Android" />
     <Reference Include="System.Data" />
-    <Reference Include="Mono.Data.Sqlcipher">
-      <HintPath>..\..\sqlcipher-mono\tests\sqlcipher-monodroid-tests\libs\Mono.Data.Sqlcipher.dll</HintPath>
-    </Reference>
+    <Reference Include="Mono.Data.Sqlite" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="MainActivity.cs" />

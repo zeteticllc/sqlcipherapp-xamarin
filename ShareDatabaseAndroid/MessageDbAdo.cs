@@ -1,7 +1,7 @@
 #if !USE_SQLCIPHER_SQLITE
 using System;
 using System.IO;
-using Mono.Data.Sqlcipher;
+using Mono.Data.Sqlite;
 
 namespace ShareDatabase
 {
@@ -21,7 +21,6 @@ namespace ShareDatabase
 		public SqliteConnection GetConnection() 
 		{
 			var connection = new SqliteConnection(String.Format("Data Source={0}", FilePath));
-			connection.SetPassword(Password);
 			connection.Open();
 			return connection;
 		}

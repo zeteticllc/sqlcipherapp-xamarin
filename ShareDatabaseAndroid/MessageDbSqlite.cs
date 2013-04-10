@@ -28,7 +28,7 @@ namespace ShareDatabase
 
 		public SQLiteConnection GetConnection() 
 		{
-			return new SQLiteConnection(FilePath,Password);
+			return new SQLiteConnection(FilePath);
 		}
 
 		public string LoadMessage() 
