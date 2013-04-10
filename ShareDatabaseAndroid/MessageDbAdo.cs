@@ -1,3 +1,4 @@
+#if !USE_SQLCIPHER_SQLITE
 using System;
 using System.IO;
 using Mono.Data.Sqlcipher;
@@ -33,7 +34,7 @@ namespace ShareDatabase
 				{
 					using (var command = connection.CreateCommand())
 					{
-						command.CommandText = "SELECT content FROM message WHERE id = 0";
+						command.CommandText = "SELECT Content FROM Message WHERE id = 0";
 						return command.ExecuteScalar() as string;
 					}
 				}
@@ -41,20 +42,20 @@ namespace ShareDatabase
 			return null;
 		}
 
-		public void SaveMessage(string message) 
+		public void SaveMessage(string content) 
 		{
 			File.Delete(FilePath);
 			using(var connection = GetConnection())
 			{	
 				using (var command = connection.CreateCommand())
 				{
-					command.CommandText = "CREATE TABLE message(id INTEGER PRIMARY KEY, content TEXT)";
+					command.CommandText = "CREATE TABLE Message(Id INTEGER PRIMARY KEY, Content TEXT)";
 					command.ExecuteNonQuery();
 
-					command.CommandText = "INSERT OR REPLACE INTO message (id, content) VALUES (0, @content)";
+					command.CommandText = "INSERT OR REPLACE INTO Message (Id, Content) VALUES (0, @content)";
 					var p = command.CreateParameter();
 					p.ParameterName = "@content";
-					p.Value = message;
+					p.Value = content;
 					command.Parameters.Add(p);
 					command.ExecuteNonQuery();
 				}
@@ -63,4 +64,5 @@ namespace ShareDatabase
 		}
 	}
 }
+#endif
 

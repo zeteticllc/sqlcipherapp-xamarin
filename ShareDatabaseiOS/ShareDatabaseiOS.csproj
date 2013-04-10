@@ -17,7 +17,7 @@
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
     <OutputPath>bin\iPhoneSimulator\Debug</OutputPath>
-    <DefineConstants>DEBUG;</DefineConstants>
+    <DefineConstants>DEBUG;USE_SQLCIPHER_SQLITE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <ConsolePause>false</ConsolePause>
@@ -38,7 +38,7 @@
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
     <OutputPath>bin\iPhone\Debug</OutputPath>
-    <DefineConstants>DEBUG;</DefineConstants>
+    <DefineConstants>DEBUG;USE_SQLCIPHER_SQLITE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <ConsolePause>false</ConsolePause>
@@ -82,7 +82,7 @@
     <Reference Include="monotouch" />
     <Reference Include="System.Data" />
     <Reference Include="Mono.Data.Sqlcipher">
-      <HintPath>..\..\SQLCipherSpeed-Xamarin\lib\ios\Mono.Data.Sqlcipher.dll</HintPath>
+      <HintPath>..\..\sqlcipher-mono\tests\sqlcipher-monotouch-tests\libs\Mono.Data.Sqlcipher.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -98,8 +98,14 @@
     <Compile Include="ShareDatabaseiOSViewController.designer.cs">
       <DependentUpon>ShareDatabaseiOSViewController.cs</DependentUpon>
     </Compile>
-    <Compile Include="..\ShareDatabaseAndroid\MessageDb.cs">
-      <Link>MessageDb.cs</Link>
+    <Compile Include="..\ShareDatabaseAndroid\MessageDbAdo.cs">
+      <Link>MessageDbSqlite.cs</Link>
+    </Compile>
+    <Compile Include="..\ShareDatabaseAndroid\SQLite.cs">
+      <Link>SQLite.cs</Link>
+    </Compile>
+    <Compile Include="..\ShareDatabaseAndroid\MessageDbSqlite.cs">
+      <Link>MessageDbAdo.cs</Link>
     </Compile>
   </ItemGroup>
   <ItemGroup>
