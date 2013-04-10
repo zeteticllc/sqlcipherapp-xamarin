@@ -18,16 +18,16 @@ namespace ShareDatabase
 		DataMimeType="*/*")]
 	public class MainActivity : Activity
 	{
-		private String databasePath = Path.Combine(System.Environment.GetFolderPath(System.Environment.SpecialFolder.Personal), "message.db");
+		private String _databasePath = Path.Combine(System.Environment.GetFolderPath(System.Environment.SpecialFolder.Personal), "message.db");
 		private MessageDb _messageDb;
-		private TextView textViewMessage;
+		private TextView _textViewMessage;
 
 		protected override void OnCreate (Bundle bundle)
 		{
 			base.OnCreate (bundle);
 			SetContentView (Resource.Layout.Main);
-			_messageDb = new MessageDb(databasePath);
-			textViewMessage = FindViewById<TextView> (Resource.Id.editTextMessage);
+			_messageDb = new MessageDb(_databasePath);
+			_textViewMessage = FindViewById<TextView> (Resource.Id.editTextMessage);
 			var button = FindViewById<Button> (Resource.Id.buttonSave);
 			button.Click += delegate {
 				Save ();
@@ -51,7 +51,7 @@ namespace ShareDatabase
 		protected override void OnStart ()
 		{
 			base.OnStart();
-			textViewMessage.Text = "";
+			_textViewMessage.Text = "";
 			Android.Net.Uri uri = this.Intent != null ? this.Intent.Data : null;
 			if(uri != null) 
 			{
@@ -62,7 +62,7 @@ namespace ShareDatabase
 				}
 			}
 
-			if(File.Exists(databasePath)){
+			if(File.Exists(_databasePath)){
 				Load ();
 			}
 		}
@@ -71,7 +71,7 @@ namespace ShareDatabase
 		{
 
 			/*
-			textViewMessage.Text = _messageDb.LoadMessage();
+			_textViewMessage.Text = _messageDb.LoadMessage();
 			*/
 			var input = new EditText(this);
 			input.InputType = (InputTypes.ClassText | InputTypes.TextVariationPassword);
@@ -84,10 +84,10 @@ namespace ShareDatabase
 						_messageDb.Password = input.Text;
 						try
 						{
-							textViewMessage.Text = _messageDb.LoadMessage();
+							_textViewMessage.Text = _messageDb.LoadMessage();
 						} catch (Exception e) 
 						{
-							textViewMessage.Text = e.Message;
+							_textViewMessage.Text = e.Message;
 						}
 					});
 			builder.Create().Show();
@@ -96,9 +96,8 @@ namespace ShareDatabase
 
 		private void Save()
 		{
-			var textViewMessage = FindViewById<TextView> (Resource.Id.editTextMessage);
 			/*
-			_messageDb.SaveMessage(textViewMessage.Text);
+			_messageDb.SaveMessage(_textViewMessage.Text);
 			*/
 
 			var input = new EditText(this);
@@ -110,7 +109,7 @@ namespace ShareDatabase
 					.SetCancelable(false)
 					.SetPositiveButton("OK", (sender, args) => {
 						_messageDb.Password = input.Text;
-						_messageDb.SaveMessage(textViewMessage.Text);
+						_messageDb.SaveMessage(_textViewMessage.Text);
 					});
 			builder.Create().Show();
 		}

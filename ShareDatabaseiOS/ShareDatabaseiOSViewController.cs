@@ -10,9 +10,8 @@ namespace ShareDatabase
 {
 	public partial class ShareDatabaseiOSViewController : UIViewController
 	{
-
-		private MessageDb _messageDb = new MessageDb(
-			Path.Combine(System.Environment.GetFolderPath(System.Environment.SpecialFolder.Personal), "message.db"));
+		private string _databasePath = Path.Combine(System.Environment.GetFolderPath(System.Environment.SpecialFolder.Personal), "message.db");
+		private MessageDb _messageDb;
 
 		static bool UserInterfaceIdiomIsPhone {
 			get { return UIDevice.CurrentDevice.UserInterfaceIdiom == UIUserInterfaceIdiom.Phone; }
@@ -22,21 +21,20 @@ namespace ShareDatabase
 			: base (UserInterfaceIdiomIsPhone ? "ShareDatabaseiOSViewController_iPhone" : "ShareDatabaseiOSViewController_iPad", null)
 		{
 		}
-		
-		public override void DidReceiveMemoryWarning ()
-		{
-			base.DidReceiveMemoryWarning ();
-		}
-		
+
 		public override void ViewDidLoad ()
 		{
 			base.ViewDidLoad ();
-			Load ();
+			_messageDb = new MessageDb(_databasePath);
 		}
 
 		public override void ViewDidAppear (bool animated)
 		{
 			base.ViewDidAppear (animated);
+			if(File.Exists(_databasePath))
+			{
+				Load ();
+			}
 		}
 
 		public override UIInterfaceOrientationMask GetSupportedInterfaceOrientations ()
@@ -64,7 +62,6 @@ namespace ShareDatabase
 				
 			};
 			alert.Show();
-
 		}
 
 		private void Save() 
